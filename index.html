@@ -6,18 +6,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Helpdesk</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#da291c">
 <style>
+  :root{--sbb:#da291c}
   body{margin:0;font-family:sans-serif;background:#f1f5f9;color:#0f172a}
-  header{background:#0f172a;color:#fff;padding:1rem}
+  header{background:var(--sbb);color:#fff;padding:1rem}
   .wrap{max-width:1000px;margin:0 auto;padding:1rem}
   .grid{display:grid;gap:1rem}
-  .two{display:grid;grid-template-columns:1fr;gap:1rem}
-  @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
   .section{display:none}.section.active{display:block}
-  .btn{padding:.8rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-size:1rem}
+  .btn{padding:.9rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-size:1rem}
   .btn.danger{background:#dc2626;color:#fff}
-  .btn.ghost{background:#e2e8f0}
+  .btn.green{background:#22c55e;color:#fff}
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.8rem}
   .card{background:#fff;border:1px solid #e2e8f0;border-radius:.8rem;padding:.8rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.1);cursor:pointer}
   .emoji{font-size:2rem;display:block;margin-bottom:.4rem}
@@ -26,6 +25,8 @@
   .dot{width:.6rem;height:.6rem;background:#1f2937;border-radius:50%;display:inline-block;margin-right:.6rem}
   .link{display:flex;align-items:center;gap:.6rem;padding:.35rem .2rem;border-radius:.4rem;cursor:pointer}
   .link:hover{background:#f1f5f9}
+  .two{display:grid;grid-template-columns:1fr;gap:1rem}
+  @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
   .list{display:grid;gap:.6rem}
   .item{background:#fff;border:1px solid #e2e8f0;border-radius:.6rem;padding:.6rem}
 </style>
@@ -66,7 +67,12 @@ function renderResults(){
   arr.forEach(it=>{
     const div=document.createElement('div'); div.className='item';
     const sub = it.unterkategorie ? ' · '+it.unterkategorie : '';
-    div.innerHTML='<h3>'+it.titel+'</h3><p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>';
+    div.innerHTML='<h3>'+it.titel+'</h3><p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
+      +'<details style="margin-top:.4rem"><summary>Details</summary>'
+      +'<h4>Sofortmaßnahmen</h4><ul>'+(it.sofortmassnahmen||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'
+      +'<h4>Schritte</h4><ol>'+(it.schritte||[]).map(x=>'<li>'+x+'</li>').join('')+'</ol>'
+      +'<p><strong>Hinweise:</strong> '+(it.hinweise||'')+'</p>'
+      +'</details>';
     list.appendChild(div);
   });
 }
@@ -81,8 +87,8 @@ document.addEventListener('DOMContentLoaded',init);
   <section class="section active" id="s1">
     <h2>Wie dringend ist die Störungsbehebung?</h2>
     <div class="grid">
-      <button class="btn danger" onclick="urgent('high')">Sehr dringend (Sicherheit/Stillstand)</button>
-      <button class="btn ghost" onclick="urgent('normal')">Nicht dringend / weiter eingrenzen</button>
+      <button class="btn danger" onclick="urgent('high')">Sehr dringend</button>
+      <button class="btn green" onclick="urgent('normal')">Nicht dringend</button>
     </div>
   </section>
 
@@ -90,14 +96,14 @@ document.addEventListener('DOMContentLoaded',init);
   <section class="section" id="urgent">
     <h2 id="hotline-title">Bitte rufe den Helpdesk an</h2>
     <a id="hotline-link" class="btn danger" href="#"><strong>Anrufen:</strong> <span id="hotline-number"></span></a>
-    <button class="btn ghost" onclick="show('s2')" style="margin-top:.6rem">Weiter</button>
+    <button class="btn green" onclick="show('s2')" style="margin-top:.6rem">Weiter</button>
   </section>
 
   <!-- Schritt 2: Fahrzeug -->
   <section class="section" id="s2">
     <h2>Welches Fahrzeug?</h2>
     <div class="grid">
-      <script>document.currentScript.insertAdjacentHTML('beforebegin',FAHRZEUGE.map(v=>'<button class="btn ghost" onclick="pickFahrzeug(\''+v+'\')">'+v+'</button>').join(''))</script>
+      <script>document.currentScript.insertAdjacentHTML('beforebegin',FAHRZEUGE.map(v=>'<button class="btn" style="background:#e2e8f0" onclick="pickFahrzeug(\''+v+'\')">'+v+'</button>').join(''))</script>
     </div>
   </section>
 
@@ -107,7 +113,7 @@ document.addEventListener('DOMContentLoaded',init);
     <div class="cards">
       <script>document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="card" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');</script>
     </div>
-    <button class="btn ghost" onclick="show('s2')" style="margin-top:.6rem">Zurück</button>
+    <button class="btn" style="background:#e2e8f0" onclick="show('s2')" >Zurück</button>
   </section>
 
   <!-- Schritt 3b: Untermenü (2 Spalten) nur für Re 450 DPZ + Bremsen -->
@@ -132,17 +138,17 @@ document.addEventListener('DOMContentLoaded',init);
         <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>EP‑Bremse an AB/Bt ausschalten</span></div>
       </div>
     </div>
-    <button class="btn ghost" onclick="show('s3')" style="margin-top:1rem">Zurück</button>
+    <button class="btn" style="background:#e2e8f0;margin-top:1rem" onclick="show('s3')">Zurück</button>
   </section>
 
   <!-- Schritt 4: Ergebnisse -->
   <section class="section" id="s4">
     <h2>Ergebnisse</h2>
     <div id="results" class="list"></div>
-    <button class="btn ghost" onclick="show('s3')" style="margin-top:.6rem">Zurück</button>
+    <button class="btn" style="background:#e2e8f0;margin-top:.6rem" onclick="show('s3')">Zurück</button>
   </section>
 
 </div>
-<footer>Helpdesk · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+<footer style="text-align:center;color:#475569;padding:2rem">Helpdesk · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
 </body>
 </html>

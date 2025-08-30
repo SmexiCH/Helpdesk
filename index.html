@@ -163,14 +163,14 @@ document.addEventListener('DOMContentLoaded',function(){
 <div class="wrap">
 
   <!-- Schritt 1: Dringlichkeit --> Dringlichkeit -->
-  <section class="section active" id="s1">
+  <section class="section" id="s1">
     <!-- Hero (moved inside s1) -->
-    <section class="hero">
+    
     <div class="glass" style="padding:1.25rem">
       <div class="title">Störungen schnell & sicher beheben</div>
       <div class="subtitle">Wähle die Dringlichkeit – dann Fahrzeug, Kategorie und Unterpunkt. Alles offline verfügbar, mit Bildern & Checklisten.</div>
     </div>
-  </section>
+  
     <h2>Wie dringend ist die Störungsbehebung?</h2>
     <div class="cardrow">
       <div class="glass card" onclick="urgent('high')">
@@ -190,15 +190,15 @@ document.addEventListener('DOMContentLoaded',function(){
         <div style="margin-left:auto"><button class="btn success">Weiter</button></div>
       </div>
     </div>
-  </section>
+  
 
   <!-- Dringend: Hotline -->
-  <section class="section" id="urgent">
+  <section class="section active" id="urgent">
     <h2 id="hotline-title">Bitte rufe den Helpdesk an</h2>
     <a id="hotline-link" class="btn danger" href="#"><strong>Anrufen:</strong> <span id="hotline-number"></span></a>
     <div style="height:.6rem"></div>
     <button class="btn success" onclick="show('s2')">Weiter</button>
-  </section>
+  
 
   <!-- Schritt 2: Fahrzeug -->
   <section class="section" id="s2">
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded',function(){
         )
       </script>
     </div>
-  </section>
+  
 
   <!-- Schritt 3: Kategorie -->
   <section class="section" id="s3">
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded',function(){
       </script>
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s2')">Zurück</button></div>
-  </section>
+  
 
   <!-- Schritt 3b: Untermenü Bremsen -->
   <section class="section" id="s3b">
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded',function(){
       </div>
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  </section>
+  
 
   <!-- Schritt 3c: Untermenü Reset -->
   <section class="section" id="s3c">
@@ -258,14 +258,14 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class="link" onclick="pickUnter('reset_funk')"><span class="dot"></span><span>Funk Reset</span></div>
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  </section>
+  
 
   <!-- Schritt 4: Ergebnisse -->
   <section class="section" id="s4">
     <h2>Ergebnisse</h2>
     <div id="results" class="list"></div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  </section>
+  
 
 </div>
 <footer>WikiStöria · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>

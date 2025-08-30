@@ -49,30 +49,35 @@ const KATEGORIEN = [
   {name:'WC',icon:'🚻'},
   {name:'Dokumente',icon:'📄'}
 ];
-let DATA=[], state={fahrzeug:null,kategorie:null,unter:null};
+let DATA=[], state={fahrzeug:null,kategorie:null,unterId:null};
 async function init(){ if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');} try{DATA=await (await fetch('data.json')).json();}catch(e){DATA=[];} show('s1'); }
 function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function urgent(level){ if(level==='high'){document.getElementById('hotline-title').textContent='Bitte rufe den Helpdesk an';document.getElementById('hotline-number').textContent=HOTLINE_TEL;document.getElementById('hotline-link').href='tel:'+HOTLINE_TEL;show('urgent');} else show('s2'); }
 function pickFahrzeug(v){state.fahrzeug=v;show('s3');}
 function pickKategorie(k){
-  state.kategorie=k; state.unter=null;
+  state.kategorie=k; state.unterId=null;
   if(state.fahrzeug==='Re 450 DPZ' && state.kategorie==='Bremsen'){ show('s3b'); }
   else { renderResults(); show('s4'); }
 }
-function pickUnter(u){ state.unter=u; renderResults(); show('s4'); }
+function pickUnter(id){ state.unterId=id; renderResults(); show('s4'); }
 function renderResults(){
   const list=document.getElementById('results'); list.innerHTML='';
-  const arr=DATA.filter(it=>(!state.fahrzeug||it.fahrzeug===state.fahrzeug)&&(!state.kategorie||it.kategorie===state.kategorie)&&(!state.unter||it.unterkategorie===state.unter));
+  let arr;
+  if(state.unterId){
+    arr = DATA.filter(it => it.id === state.unterId); // show only chosen item
+  } else {
+    arr = DATA.filter(it => (!state.fahrzeug || it.fahrzeug===state.fahrzeug) && (!state.kategorie || it.kategorie===state.kategorie));
+  }
   if(arr.length===0){ list.innerHTML='<div class="item">Keine Treffer.</div>'; return; }
   arr.forEach(it=>{
     const div=document.createElement('div'); div.className='item';
     const sub = it.unterkategorie ? ' · '+it.unterkategorie : '';
-    div.innerHTML='<h3>'+it.titel+'</h3><p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
-      +'<details style="margin-top:.4rem"><summary>Details</summary>'
+    // Details expanded by default (no <details>)
+    div.innerHTML='<h3>'+it.titel+'</h3>'
+      +'<p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
       +'<h4>Sofortmaßnahmen</h4><ul>'+(it.sofortmassnahmen||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'
       +'<h4>Schritte</h4><ol>'+(it.schritte||[]).map(x=>'<li>'+x+'</li>').join('')+'</ol>'
-      +'<p><strong>Hinweise:</strong> '+(it.hinweise||'')+'</p>'
-      +'</details>';
+      +'<p><strong>Hinweise:</strong> '+(it.hinweise||'')+'</p>';
     list.appendChild(div);
   });
 }
@@ -122,20 +127,20 @@ document.addEventListener('DOMContentLoaded',init);
     <div class="two">
       <div class="panel">
         <h3>📘 Federspeicherbremse</h3>
-        <div class="link" onclick="pickUnter('Federspeicherbremse')"><span class="dot"></span><span>Störung Federspeicherbremse</span></div>
-        <div class="link" onclick="pickUnter('Federspeicherbremse')"><span class="dot"></span><span>Federspeicherbremse Notlösen AB/Bt</span></div>
-        <div class="link" onclick="pickUnter('Federspeicherbremse')"><span class="dot"></span><span>Federspeicherbremse reaktivieren AB/Bt</span></div>
-        <div class="link" onclick="pickUnter('Federspeicherbremse')"><span class="dot"></span><span>Federspeicherbremse Notlösen NDW</span></div>
-        <div class="link" onclick="pickUnter('Federspeicherbremse')"><span class="dot"></span><span>Federspeicherbremse reaktivieren NDW</span></div>
+        <div class="link" onclick="pickUnter('fsb_stoerung')"><span class="dot"></span><span>Störung Federspeicherbremse</span></div>
+        <div class="link" onclick="pickUnter('fsb_notloesen_ab_bt')"><span class="dot"></span><span>Federspeicherbremse Notlösen AB/Bt</span></div>
+        <div class="link" onclick="pickUnter('fsb_reaktiv_ab_bt')"><span class="dot"></span><span>Federspeicherbremse reaktivieren AB/Bt</span></div>
+        <div class="link" onclick="pickUnter('fsb_notloesen_ndw')"><span class="dot"></span><span>Federspeicherbremse Notlösen NDW</span></div>
+        <div class="link" onclick="pickUnter('fsb_reaktiv_ndw')"><span class="dot"></span><span>Federspeicherbremse reaktivieren NDW</span></div>
       </div>
       <div class="panel">
         <h3>📘 Pneumatische Bremse</h3>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>Bremsen Auszupfen</span></div>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>Gesamte Bremse ausschalten AB/Bt</span></div>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>Gesamte Bremse ausschalten NDW</span></div>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>Automatische Bremse ausschalten AB/Bt</span></div>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>Automatische Bremse ausschalten NDW</span></div>
-        <div class="link" onclick="pickUnter('Pneumatische Bremse')"><span class="dot"></span><span>EP‑Bremse an AB/Bt ausschalten</span></div>
+        <div class="link" onclick="pickUnter('pb_auszupfen')"><span class="dot"></span><span>Bremsen Auszupfen</span></div>
+        <div class="link" onclick="pickUnter('pb_ges_ab_bt')"><span class="dot"></span><span>Gesamte Bremse ausschalten AB/Bt</span></div>
+        <div class="link" onclick="pickUnter('pb_ges_ndw')"><span class="dot"></span><span>Gesamte Bremse ausschalten NDW</span></div>
+        <div class="link" onclick="pickUnter('pb_auto_ab_bt')"><span class="dot"></span><span>Automatische Bremse ausschalten AB/Bt</span></div>
+        <div class="link" onclick="pickUnter('pb_auto_ndw')"><span class="dot"></span><span>Automatische Bremse ausschalten NDW</span></div>
+        <div class="link" onclick="pickUnter('pb_ep_ab_bt')"><span class="dot"></span><span>EP‑Bremse an AB/Bt ausschalten</span></div>
       </div>
     </div>
     <button class="btn" style="background:#e2e8f0;margin-top:1rem" onclick="show('s3')">Zurück</button>

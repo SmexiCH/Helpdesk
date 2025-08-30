@@ -229,5 +229,24 @@ document.addEventListener('DOMContentLoaded',init);
 
 </div>
 <footer>WikiStöria · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+
+<script data-theme-init>
+document.addEventListener('DOMContentLoaded', function(){
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('wikistoeria_theme');
+  const current = saved || (prefersDark ? 'dark' : 'light');
+  document.body.setAttribute('data-theme', current);
+  const btn = document.getElementById('themeToggle');
+  function toggle(){
+    const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', now);
+    localStorage.setItem('wikistoeria_theme', now);
+  }
+  if(btn && !btn.dataset.bound){ 
+    btn.addEventListener('click', toggle); 
+    btn.dataset.bound = '1';
+  }
+});
+</script>
 </body>
 </html>

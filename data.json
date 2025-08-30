@@ -1,33 +1,169 @@
 [
   {
-    "id": "demo_tuer",
-    "titel": "Tür klemmt",
-    "fahrzeug": "RABe 511 RVD",
-    "kategorie": "Einstiegstüren",
+    "id": "fsb_stoerung",
+    "titel": "Störung Federspeicherbremse",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Federspeicherbremse",
     "schweregrad": "mittel",
     "sofortmassnahmen": [
       "Zug sichern",
-      "Tür sperren"
-    ],
-    "schritte": [
-      "Visuelle Prüfung",
-      "SOP beachten"
-    ],
-    "hinweise": "Demo – bitte mit SOP abgleichen."
-  },
-  {
-    "id": "demo_bremse",
-    "titel": "Bremswarnung",
-    "fahrzeug": "Re 420 HVZ-D",
-    "kategorie": "Bremsen",
-    "schweregrad": "hoch",
-    "sofortmassnahmen": [
-      "Anhalten",
       "Leitstelle informieren"
     ],
     "schritte": [
-      "Fehlercode notieren"
+      "Status prüfen",
+      "SOP beachten"
     ],
-    "hinweise": "Demo – sicherheitsrelevant."
+    "hinweise": "Demo"
+  },
+  {
+    "id": "fsb_notloesen_ab_bt",
+    "titel": "Federspeicherbremse Notlösen AB/Bt",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Federspeicherbremse",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Notlöse nach SOP"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "fsb_reaktiv_ab_bt",
+    "titel": "Federspeicherbremse reaktivieren AB/Bt",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Federspeicherbremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Reaktivierung nach SOP"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "fsb_notloesen_ndw",
+    "titel": "Federspeicherbremse Notlösen NDW",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Federspeicherbremse",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Notlöse NDW"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "fsb_reaktiv_ndw",
+    "titel": "Federspeicherbremse reaktivieren NDW",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Federspeicherbremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Reaktivieren NDW"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_auszupfen",
+    "titel": "Bremsen auszupfen",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Vorgehen nach SOP"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_gesamte_ab_bt",
+    "titel": "Gesamte Bremse ausschalten AB/Bt",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Ausschalten AB/Bt"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_gesamte_ndw",
+    "titel": "Gesamte Bremse ausschalten NDW",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Ausschalten NDW"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_auto_ab_bt",
+    "titel": "Automatische Bremse ausschalten AB/Bt",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Ausschalten AB/Bt"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_auto_ndw",
+    "titel": "Automatische Bremse ausschalten NDW",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "Ausschalten NDW"
+    ],
+    "hinweise": "Demo"
+  },
+  {
+    "id": "pb_ep_ab_bt",
+    "titel": "EP‑Bremse an AB/Bt ausschalten",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Sichern"
+    ],
+    "schritte": [
+      "EP ausschalten AB/Bt"
+    ],
+    "hinweise": "Demo"
   }
 ]

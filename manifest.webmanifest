@@ -1,6 +1,6 @@
 {
-  "name": "Störungshilfe",
-  "short_name": "Störungshilfe",
+  "name": "Störiothek",
+  "short_name": "Störiothek",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#444444",

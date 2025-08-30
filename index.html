@@ -92,6 +92,7 @@ function pickFahrzeug(v){state.fahrzeug=v;show('s3');}
 function pickKategorie(k){
   state.kategorie=k; state.unterId=null;
   if(state.fahrzeug==='Re 450 DPZ' && state.kategorie==='Bremsen'){ show('s3b'); }
+  else if(state.fahrzeug==='Re 450 DPZ' && state.kategorie==='Reset'){ show('s3c'); }
   else { renderResults(); show('s4'); }
 }
 function pickUnter(id){ state.unterId=id; renderResults(); show('s4'); }
@@ -219,6 +220,19 @@ document.addEventListener('DOMContentLoaded',init);
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
   </section>
+
+  <!-- Schritt 3c: Untermenü für Reset -->
+  <section class="section" id="s3c">
+    <h2>Reset · Re 450 DPZ</h2>
+    <div class="panel">
+      <h3>📘 Fahrzeug Reset</h3>
+      <div class="link" onclick="pickUnter('reset_motor')"><span class="dot"></span><span>Abtrennung von Motordrehgestellen</span></div>
+      <div class="link" onclick="pickUnter('reset_leittechnik')"><span class="dot"></span><span>Leittechnik Reset</span></div>
+      <div class="link" onclick="pickUnter('reset_funk')"><span class="dot"></span><span>Funk Reset</span></div>
+    </div>
+    <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
+  </section>
+
 
   <!-- Schritt 4: Ergebnisse -->
   <section class="section" id="s4">

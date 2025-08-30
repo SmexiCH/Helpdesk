@@ -157,25 +157,27 @@
     "fahrzeug": "Re 450 DPZ",
     "kategorie": "Bremsen",
     "unterkategorie": "Pneumatische Bremse",
-    "schweregrad": "hoch",
     "sofortmassnahmen": [
       "Fahrzeug sichern",
       "Wenn Bremse(n) nicht löst → Zug sichern"
     ],
     "schritte": [
-      "Ausgangslage:",
+      "Ausgangslage"
+    
       "• Fz gesichert",
       "• Fz löst Bremse(n) nicht",
       "• Zug ist überfüllt",
-      "",
+      
       "Behebungsmassnahme RE 450 / AB / Bt:",
+    
       "• Absperrhahn «Automatische Bremse» [121.6], rot schliessen",
       "• Auslöseventil [124.6] ca. 20 Sek. drücken, bis keine Luft mehr entweicht",
       "   - Kontrolle: gesamte Bremse am Wagen lose",
       "   - Wenn Bremse lose: Autom. Bremse wieder einschalten [121.6], Bremsprobe wiederholen",
       "• Absperrhähne an Plattform B1 + B6 beachten",
-      "",
+      
       "Behebungsmassnahme NDW:",
+    
       "• Lösezug in der Pneumatikktafel ziehen (unter der Treppe gegenüber vom WC-Eingang) [800.124.6.01]"
     ],
     "hinweise": "Automatische Bremse Absperrhähne (B1+B6):<br><img src='bremsen-auszupfen.png' style='max-width:100%;height:auto'><br><br>NDW Pneumatikktafel:<br><img src='pneumatiktafel.png' style='max-width:100%;height:auto'>"

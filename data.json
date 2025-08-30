@@ -1,0 +1,23 @@
+[
+  {
+    "id": "door_not_closing",
+    "titel": "Tür schließt nicht",
+    "kategorie": "Türsystem",
+    "tags": [
+      "tür",
+      "schließen"
+    ],
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Zug anhalten und sichern.",
+      "Tür sperren, Fahrgäste informieren."
+    ],
+    "schritte": [
+      "Tür visuell prüfen.",
+      "SOP beachten.",
+      "Leitstelle kontaktieren."
+    ],
+    "hinweise": "Beispiel – bitte mit euren Vorschriften abgleichen.",
+    "letzteAktualisierung": "2025-08-30"
+  }
+]

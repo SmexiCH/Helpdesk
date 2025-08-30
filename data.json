@@ -164,9 +164,9 @@
     ],
     "schritte": [
       "Ausgangslage:",
-      "• Fahrzeug ist gegen Entlaufen gesichert",
-      "• Das Fahrzeug löst die Bremse(n) nicht",
-      "• Bremse ist überfüllt",
+      "• Fz gesichert",
+      "• Fz löst Bremse(n) nicht",
+      "• Zug ist überfüllt",
       "",
       "Behebungsmassnahme RE 450 / AB / Bt:",
       "• Absperrhahn «Automatische Bremse» [121.6], rot schliessen",

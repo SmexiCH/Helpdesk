@@ -11,65 +11,60 @@
 <meta name="theme-color" content="#da291c">
 <style>
   :root{
-    --bg1:#0b1220; --bg2:#111827;
-    --card:rgba(255,255,255,0.08); --cardBorder:rgba(255,255,255,0.18);
-    --text:#e5e7eb; --muted:#94a3b8;
+    /* Light theme (default) */
+    --bg1:#f9fafb; --bg2:#e5e7eb;
+    --text:#111827; --muted:#6b7280;
+    --card:#ffffff; --border:#e5e7eb;
     --primary:#da291c; --danger:#ef4444; --success:#22c55e;
-    --shadow: 0 10px 30px rgba(0,0,0,.35);
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Inter',system-ui,Arial,sans-serif;color:var(--text);
-       background: radial-gradient(1200px 700px at 20% -10%, #1e3a8a 0%, transparent 60%),
-                   radial-gradient(1000px 600px at 100% 0%, #881337 0%, transparent 55%),
-                   linear-gradient(135deg,var(--bg1),var(--bg2));
-       min-height:100vh;}
-  /* Header with Glass Bar */
-  header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(10px);
-         background: rgba(13,18,31,0.6); border-bottom:1px solid rgba(255,255,255,.07);}
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1100px;margin:0 auto;padding:1rem 1.25rem}
-  .brand{display:flex;align-items:center;gap:.75rem;font-weight:700;letter-spacing:.2px}
-  .brand .logo{width:28px;height:28px;border-radius:8px;background:#da291c;display:inline-grid;place-items:center;color:#fff;font-weight:800;box-shadow:var(--shadow)}
-  #themeToggle{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);padding:.5rem .75rem;border-radius:.6rem;cursor:pointer}
+       background: linear-gradient(135deg,var(--bg1),var(--bg2));}
+  header{position:sticky;top:0;z-index:10;background:var(--primary);color:#fff;
+         padding:1rem 1.25rem;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+  header h1{margin:0;font-size:1.4rem;letter-spacing:.2px}
   .wrap{max-width:1100px;margin:0 auto;padding:1.25rem}
-  .hero{margin:1rem 0 1.25rem;display:grid;gap:1rem}
-  .hero .title{font-size:1.9rem;font-weight:800;letter-spacing:.3px}
-  .hero .subtitle{color:var(--muted)}
-  /* Glass cards */
-  .glass{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; box-shadow:var(--shadow); backdrop-filter: blur(12px) saturate(140%);}
+  .section{display:none}.section.active{display:block}
   .cardrow{display:grid;grid-template-columns:1fr;gap:1rem}
-  @media(min-width:760px){.cardrow{grid-template-columns:repeat(2,1fr)}}
-  .card{padding:1.25rem; display:flex; align-items:center; gap:.9rem; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;}
-  .card:hover{transform:translateY(-3px)}
+  @media(min-width:700px){.cardrow{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.25rem;
+        box-shadow:0 6px 18px rgba(0,0,0,.06);display:flex;align-items:center;gap:.9rem;cursor:pointer;
+        transition:transform .15s ease, box-shadow .15s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.1)}
   .card .icon{font-size:1.6rem}
   .card .title{font-weight:700}
-  .btn{padding:.85rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-weight:700}
+  .btn{padding:.85rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-weight:600}
   .btn.danger{background:var(--danger);color:white}
   .btn.success{background:var(--success);color:white}
-  /* Categories */
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
-  .cat{padding:1rem;text-align:center}
+  .grid{display:grid;gap:1rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem}
+  .cat{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;text-align:center;
+       box-shadow:0 6px 18px rgba(0,0,0,.06);cursor:pointer}
   .emoji{font-size:2rem;display:block;margin-bottom:.4rem}
-  /* Panels */
-  .panel{padding:1rem}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
   .two{display:grid;grid-template-columns:1fr;gap:1rem}
   @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
   .link{display:flex;align-items:center;gap:.6rem;padding:.45rem;border-radius:.5rem;cursor:pointer}
-  .link:hover{background:rgba(255,255,255,.06)}
-  .dot{width:.55rem;height:.55rem;background:#cbd5e1;border-radius:50%}
-  /* Results */
+  .link:hover{background:#f3f4f6}
+  .dot{width:.55rem;height:.55rem;background:#1f2937;border-radius:50%}
   .list{display:grid;gap:1rem}
-  .item{padding:1rem}
+  .item{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
   h2{margin:.2rem 0 1rem}
   footer{color:var(--muted);text-align:center;padding:2rem 1rem}
-  a{color:#93c5fd}
-  /* Light theme variant via data attribute */
-  body[data-theme="light"]{
-    --bg1:#f9fafb; --bg2:#e5e7eb;
-    --text:#111827; --muted:#475569;
-    --card:rgba(255,255,255,0.7); --cardBorder:rgba(255,255,255,0.8);
+
+  /* Dark theme */
+  body[data-theme="dark"]{
+    --bg1:#0f172a; --bg2:#020617;
+    --text:#e5e7eb; --muted:#94a3b8;
+    --card:#111827; --border:#1f2937;
+    --primary:#da291c; --danger:#ef4444; --success:#22c55e;
   }
-  body[data-theme="light"] .link:hover{background:rgba(0,0,0,.05)}
+  body[data-theme="dark"] header{ background: var(--primary); color:#fff; }
+  body[data-theme="dark"] .card:hover{ box-shadow:0 10px 24px rgba(0,0,0,.35) }
+  body[data-theme="dark"] .link:hover{ background:#0b1220 }
+  body[data-theme="dark"] footer{ color:#94a3b8 }
 </style>
+
 <script>
 const HOTLINE_TEL = '051-222-1853';
 const FAHRZEUGE = ['Re 450 DPZ','Re 420 HVZ-D','RABe 514 DTZ','RABe 511 RVD'];
@@ -97,7 +92,6 @@ function pickFahrzeug(v){state.fahrzeug=v;show('s3');}
 function pickKategorie(k){
   state.kategorie=k; state.unterId=null;
   if(state.fahrzeug==='Re 450 DPZ' && state.kategorie==='Bremsen'){ show('s3b'); }
-  else if(state.fahrzeug==='Re 450 DPZ' && state.kategorie==='Reset'){ show('s3c'); }
   else { renderResults(); show('s4'); }
 }
 function pickUnter(id){ state.unterId=id; renderResults(); show('s4'); }
@@ -106,74 +100,52 @@ function renderResults(){
   let arr;
   if(state.unterId){ arr = DATA.filter(it => it.id === state.unterId); }
   else { arr = DATA.filter(it => (!state.fahrzeug || it.fahrzeug===state.fahrzeug) && (!state.kategorie || it.kategorie===state.kategorie)); }
-  if(arr.length===0){ list.innerHTML='<div class="glass item">Keine Treffer.</div>'; return; }
+  if(arr.length===0){ list.innerHTML='<div class="item">Keine Treffer.</div>'; return; }
   arr.forEach(it=>{
-    const div=document.createElement('div'); div.className='glass item';
+    const div=document.createElement('div'); div.className='item';
     const sub = it.unterkategorie ? ' · '+it.unterkategorie : '';
-    // Lightbox-ready: make images inside Hinweise clickable
-    const hint = (it.hinweise||'').replaceAll('<img ','<img class="lb" ');
     div.innerHTML='<h3 style="margin:.2rem 0 0">'+it.titel+'</h3>'
-      +'<p style="margin:.3rem 0 .6rem;color:#cbd5e1"><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
+      +'<p style="margin:.3rem 0 .6rem;color:#374151"><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
       +'<h4>Sofortmaßnahmen</h4><ul>'+(it.sofortmassnahmen||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'
       +'<h4>Schritte</h4><ol>'+(it.schritte||[]).map(x=>'<li>'+x+'</li>').join('')+'</ol>'
-      +'<p><strong>Hinweise:</strong> '+ hint +'</p>';
+      +'<p><strong>Hinweise:</strong> '+(it.hinweise||'')+'</p>';
     list.appendChild(div);
   });
-  // Bind lightbox
-  document.querySelectorAll('.lb').forEach(img=>{
-    img.style.maxWidth='100%'; img.style.height='auto'; img.style.cursor='zoom-in';
-    img.addEventListener('click',()=>openLightbox(img.src));
-  });
 }
-// Simple lightbox
-function openLightbox(src){
-  let overlay=document.createElement('div');
-  overlay.style.position='fixed';overlay.style.inset='0';overlay.style.background='rgba(0,0,0,.8)';
-  overlay.style.display='grid';overlay.style.placeItems='center';overlay.style.zIndex='9999';
-  overlay.innerHTML='<img src="'+src+'" style="max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 10px 35px rgba(0,0,0,.6)">';
-  overlay.addEventListener('click',()=>document.body.removeChild(overlay));
-  document.body.appendChild(overlay);
-}
-document.addEventListener('DOMContentLoaded',function(){
-  // Theme init & toggle
+document.addEventListener('DOMContentLoaded',init);
+</script>
+<script>
+(function(){
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const saved = localStorage.getItem('wikistoeria_theme');
   const current = saved || (prefersDark ? 'dark' : 'light');
   document.body.setAttribute('data-theme', current);
   const btn = document.getElementById('themeToggle');
-  if(btn && !btn.dataset.bound){
-    btn.addEventListener('click', function(){
-      const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.body.setAttribute('data-theme', now);
-      localStorage.setItem('wikistoeria_theme', now);
-    });
-    btn.dataset.bound = '1';
+  function toggle(){
+    const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', now);
+    localStorage.setItem('wikistoeria_theme', now);
   }
-  init();
-});
-</script>
+  if(btn){ btn.addEventListener('click', toggle); }
+})();</script>
 </head>
 <body>
 <header>
-  <div class="topbar">
-    <div class="brand"><span class="logo">WS</span> WikiStöria</div>
-    <button id="themeToggle" aria-label="Darstellung umschalten" title="Darstellung umschalten">🌙 / ☀️</button>
+  <div style="display:flex;align-items:center;gap:1rem;justify-content:space-between;max-width:1100px;margin:0 auto">
+    <h1>WikiStöria</h1>
+    <button id="themeToggle" aria-label="Darstellung umschalten" title="Darstellung umschalten"
+      style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(0,0,0,.2);padding:.5rem .75rem;border-radius:.6rem;cursor:pointer">
+      🌙 / ☀️
+    </button>
   </div>
 </header>
 <div class="wrap">
 
-  <!-- Schritt 1: Dringlichkeit --> Dringlichkeit -->
+  <!-- Schritt 1: Moderne Startseite mit Cards -->
   <section class="section active" id="s1">
-    <!-- Hero (moved inside s1) -->
-    
-    <div class="glass" style="padding:1.25rem">
-      <div class="title">Störungen schnell & sicher beheben</div>
-      <div class="subtitle">Wähle die Dringlichkeit – dann Fahrzeug, Kategorie und Unterpunkt. Alles offline verfügbar, mit Bildern & Checklisten.</div>
-    </div>
-  
     <h2>Wie dringend ist die Störungsbehebung?</h2>
     <div class="cardrow">
-      <div class="glass card" onclick="urgent('high')">
+      <div class="card" onclick="urgent('high')">
         <div class="icon">⏱️</div>
         <div>
           <div class="title">Sehr dringend</div>
@@ -181,7 +153,7 @@ document.addEventListener('DOMContentLoaded',function(){
         </div>
         <div style="margin-left:auto"><button class="btn danger">Weiter</button></div>
       </div>
-      <div class="glass card" onclick="urgent('normal')">
+      <div class="card" onclick="urgent('normal')">
         <div class="icon">✅</div>
         <div>
           <div class="title">Nicht dringend</div>
@@ -190,7 +162,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div style="margin-left:auto"><button class="btn success">Weiter</button></div>
       </div>
     </div>
-  
+  </section>
 
   <!-- Dringend: Hotline -->
   <section class="section" id="urgent">
@@ -198,36 +170,36 @@ document.addEventListener('DOMContentLoaded',function(){
     <a id="hotline-link" class="btn danger" href="#"><strong>Anrufen:</strong> <span id="hotline-number"></span></a>
     <div style="height:.6rem"></div>
     <button class="btn success" onclick="show('s2')">Weiter</button>
-  
+  </section>
 
   <!-- Schritt 2: Fahrzeug -->
   <section class="section" id="s2">
     <h2>Welches Fahrzeug?</h2>
-    <div class="cards">
+    <div class="grid">
       <script>
         document.currentScript.insertAdjacentHTML('beforebegin',
-          FAHRZEUGE.map(v=>'<div class="glass cat" onclick="pickFahrzeug(\''+v+'\')"><div class="emoji">🚆</div><div class="title">'+v+'</div></div>').join('')
+          FAHRZEUGE.map(v=>'<div class="card" onclick="pickFahrzeug(\''+v+'\')"><div class="icon">🚆</div><div class="title">'+v+'</div></div>').join('')
         )
       </script>
     </div>
-  
+  </section>
 
   <!-- Schritt 3: Kategorie -->
   <section class="section" id="s3">
     <h2>Kategorie wählen</h2>
     <div class="cards">
       <script>
-        document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="glass cat" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');
+        document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="cat" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');
       </script>
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s2')">Zurück</button></div>
-  
+  </section>
 
-  <!-- Schritt 3b: Untermenü Bremsen -->
+  <!-- Schritt 3b: Untermenü -->
   <section class="section" id="s3b">
     <h2>Bremsen · Re 450 DPZ</h2>
     <div class="two">
-      <div class="glass panel">
+      <div class="panel">
         <h3>📘 Federspeicherbremse</h3>
         <div class="link" onclick="pickUnter('fsb_stoerung')"><span class="dot"></span><span>Störung Federspeicherbremse</span></div>
         <div class="link" onclick="pickUnter('fsb_notloesen_ab_bt')"><span class="dot"></span><span>Federspeicherbremse Notlösen AB/Bt</span></div>
@@ -235,7 +207,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="link" onclick="pickUnter('fsb_notloesen_ndw')"><span class="dot"></span><span>Federspeicherbremse Notlösen NDW</span></div>
         <div class="link" onclick="pickUnter('fsb_reaktiv_ndw')"><span class="dot"></span><span>Federspeicherbremse reaktivieren NDW</span></div>
       </div>
-      <div class="glass panel">
+      <div class="panel">
         <h3>📘 Pneumatische Bremse</h3>
         <div class="link" onclick="pickUnter('pb_auszupfen')"><span class="dot"></span><span>Bremsen Auszupfen</span></div>
         <div class="link" onclick="pickUnter('pb_ges_ab_bt')"><span class="dot"></span><span>Gesamte Bremse ausschalten AB/Bt</span></div>
@@ -246,28 +218,35 @@ document.addEventListener('DOMContentLoaded',function(){
       </div>
     </div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  
-
-  <!-- Schritt 3c: Untermenü Reset -->
-  <section class="section" id="s3c">
-    <h2>Reset · Re 450 DPZ</h2>
-    <div class="glass panel">
-      <h3>📘 Fahrzeug Reset</h3>
-      <div class="link" onclick="pickUnter('reset_motor')"><span class="dot"></span><span>Abtrennung von Motordrehgestellen</span></div>
-      <div class="link" onclick="pickUnter('reset_leittechnik')"><span class="dot"></span><span>Leittechnik Reset</span></div>
-      <div class="link" onclick="pickUnter('reset_funk')"><span class="dot"></span><span>Funk Reset</span></div>
-    </div>
-    <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  
+  </section>
 
   <!-- Schritt 4: Ergebnisse -->
   <section class="section" id="s4">
     <h2>Ergebnisse</h2>
     <div id="results" class="list"></div>
     <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
-  
+  </section>
 
 </div>
 <footer>WikiStöria · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+
+<script data-theme-init>
+document.addEventListener('DOMContentLoaded', function(){
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('wikistoeria_theme');
+  const current = saved || (prefersDark ? 'dark' : 'light');
+  document.body.setAttribute('data-theme', current);
+  const btn = document.getElementById('themeToggle');
+  function toggle(){
+    const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', now);
+    localStorage.setItem('wikistoeria_theme', now);
+  }
+  if(btn && !btn.dataset.bound){ 
+    btn.addEventListener('click', toggle); 
+    btn.dataset.bound = '1';
+  }
+});
+</script>
 </body>
 </html>

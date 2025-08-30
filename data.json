@@ -179,53 +179,5 @@
       "• Lösezug in der Pneumatikktafel ziehen (unter der Treppe gegenüber vom WC-Eingang) [800.124.6.01]"
     ],
     "hinweise": "Automatische Bremse Absperrhähne (B1+B6):<br><img src='bremsen-auszupfen.png' style='max-width:100%;height:auto'><br><br>NDW Pneumatikktafel:<br><img src='pneumatiktafel.png' style='max-width:100%;height:auto'>"
-  },
-  {
-    "id": "reset_motor",
-    "titel": "Abtrennung von Motordrehgestellen",
-    "fahrzeug": "Re 450 DPZ",
-    "kategorie": "Reset",
-    "unterkategorie": "Fahrzeug Reset",
-    "schweregrad": "mittel",
-    "sofortmassnahmen": [
-      "Fahrzeug sichern"
-    ],
-    "schritte": [
-      "Voraussetzungen prüfen (Sicherheit, Abstelllage).",
-      "Anleitung gemäß SOP durchführen.",
-      "Systeme erneut prüfen."
-    ],
-    "hinweise": "Demo – Inhalte bitte mit SOP abgleichen."
-  },
-  {
-    "id": "reset_leittechnik",
-    "titel": "Leittechnik Reset",
-    "fahrzeug": "Re 450 DPZ",
-    "kategorie": "Reset",
-    "unterkategorie": "Fahrzeug Reset",
-    "schweregrad": "mittel",
-    "sofortmassnahmen": [
-      "Zugverkehrsleiter informieren"
-    ],
-    "schritte": [
-      "Leittechnik-Reset gemäß Herstelleranleitung.",
-      "Status kontrollieren, ggf. Wiederholung.",
-      "Störungsjournal ergänzen."
-    ],
-    "hinweise": "Demo – Inhalte bitte mit SOP abgleichen."
-  },
-  {
-    "id": "reset_funk",
-    "titel": "Funk Reset",
-    "fahrzeug": "Re 450 DPZ",
-    "kategorie": "Reset",
-    "unterkategorie": "Fahrzeug Reset",
-    "schweregrad": "niedrig",
-    "sofortmassnahmen": [],
-    "schritte": [
-      "Funkgerät gemäß Anleitung neu starten.",
-      "Verbindung prüfen (Probe)."
-    ],
-    "hinweise": "Demo – Inhalte bitte mit SOP abgleichen."
   }
 ]

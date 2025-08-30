@@ -3,7 +3,7 @@
   "short_name": "WikiStöria",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0b1220",
+  "background_color": "#f9fafb",
   "theme_color": "#da291c",
   "icons": [
     {

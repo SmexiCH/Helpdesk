@@ -11,6 +11,7 @@
 <meta name="theme-color" content="#da291c">
 <style>
   :root{
+    /* Light theme (default) */
     --bg1:#f9fafb; --bg2:#e5e7eb;
     --text:#111827; --muted:#6b7280;
     --card:#ffffff; --border:#e5e7eb;
@@ -50,7 +51,20 @@
   .item{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
   h2{margin:.2rem 0 1rem}
   footer{color:var(--muted);text-align:center;padding:2rem 1rem}
+
+  /* Dark theme */
+  body[data-theme="dark"]{
+    --bg1:#0f172a; --bg2:#020617;
+    --text:#e5e7eb; --muted:#94a3b8;
+    --card:#111827; --border:#1f2937;
+    --primary:#da291c; --danger:#ef4444; --success:#22c55e;
+  }
+  body[data-theme="dark"] header{ background: var(--primary); color:#fff; }
+  body[data-theme="dark"] .card:hover{ box-shadow:0 10px 24px rgba(0,0,0,.35) }
+  body[data-theme="dark"] .link:hover{ background:#0b1220 }
+  body[data-theme="dark"] footer{ color:#94a3b8 }
 </style>
+
 <script>
 const HOTLINE_TEL = '051-222-1853';
 const FAHRZEUGE = ['Re 450 DPZ','Re 420 HVZ-D','RABe 514 DTZ','RABe 511 RVD'];
@@ -100,9 +114,31 @@ function renderResults(){
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
+<script>
+(function(){
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('wikistoeria_theme');
+  const current = saved || (prefersDark ? 'dark' : 'light');
+  document.body.setAttribute('data-theme', current);
+  const btn = document.getElementById('themeToggle');
+  function toggle(){
+    const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', now);
+    localStorage.setItem('wikistoeria_theme', now);
+  }
+  if(btn){ btn.addEventListener('click', toggle); }
+})();</script>
 </head>
 <body>
-<header><h1>WikiStöria</h1></header>
+<header>
+  <div style="display:flex;align-items:center;gap:1rem;justify-content:space-between;max-width:1100px;margin:0 auto">
+    <h1>WikiStöria</h1>
+    <button id="themeToggle" aria-label="Darstellung umschalten" title="Darstellung umschalten"
+      style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(0,0,0,.2);padding:.5rem .75rem;border-radius:.6rem;cursor:pointer">
+      🌙 / ☀️
+    </button>
+  </div>
+</header>
 <div class="wrap">
 
   <!-- Schritt 1: Moderne Startseite mit Cards -->
@@ -113,7 +149,7 @@ document.addEventListener('DOMContentLoaded',init);
         <div class="icon">⏱️</div>
         <div>
           <div class="title">Sehr dringend</div>
-          <div style="color:var(--muted)">Sicherheitsrelevant oder Stillstand</div>
+          <div style="color:var(--muted)">Stillstand / baldige Abfahrt nötig</div>
         </div>
         <div style="margin-left:auto"><button class="btn danger">Weiter</button></div>
       </div>

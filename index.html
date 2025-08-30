@@ -6,40 +6,50 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WikiStöria</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#444444">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#da291c">
 <style>
-  :root{--metal1:#6b7280;--metal2:#9ca3af;--metal3:#f3f4f6;--metal4:#111827}
-  body{margin:0;font-family:sans-serif;background:#f1f5f9;color:#0f172a}
-  /* Metallic header */
-  header{
-    color:#111; padding:1rem; position:relative; overflow:hidden;
-    background: linear-gradient(135deg, var(--metal4) 0%, var(--metal2) 22%, var(--metal3) 50%, var(--metal2) 78%, var(--metal4) 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.2), 0 4px 12px rgba(0,0,0,.2);
+  :root{
+    --bg1:#f9fafb; --bg2:#e5e7eb;
+    --text:#111827; --muted:#6b7280;
+    --card:#ffffff; --border:#e5e7eb;
+    --primary:#da291c; --danger:#ef4444; --success:#22c55e;
   }
-  header h1{margin:0; color:#fff; text-shadow: 0 1px 1px rgba(0,0,0,.4)}
-  header::after{
-    content:''; position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0) 40%);
-    pointer-events:none; mix-blend-mode: screen;
-  }
-  .wrap{max-width:1000px;margin:0 auto;padding:1rem}
-  .grid{display:grid;gap:1rem}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Inter',system-ui,Arial,sans-serif;color:var(--text);
+       background: linear-gradient(135deg,var(--bg1),var(--bg2));}
+  header{position:sticky;top:0;z-index:10;background:var(--primary);color:#fff;
+         padding:1rem 1.25rem;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+  header h1{margin:0;font-size:1.4rem;letter-spacing:.2px}
+  .wrap{max-width:1100px;margin:0 auto;padding:1.25rem}
   .section{display:none}.section.active{display:block}
-  .btn{padding:.9rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-size:1rem}
-  .btn.danger{background:#dc2626;color:#fff}
-  .btn.green{background:#22c55e;color:#fff}
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.8rem}
-  .card{background:#fff;border:1px solid #e2e8f0;border-radius:.8rem;padding:.8rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.1);cursor:pointer}
+  .cardrow{display:grid;grid-template-columns:1fr;gap:1rem}
+  @media(min-width:700px){.cardrow{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.25rem;
+        box-shadow:0 6px 18px rgba(0,0,0,.06);display:flex;align-items:center;gap:.9rem;cursor:pointer;
+        transition:transform .15s ease, box-shadow .15s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.1)}
+  .card .icon{font-size:1.6rem}
+  .card .title{font-weight:700}
+  .btn{padding:.85rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-weight:600}
+  .btn.danger{background:var(--danger);color:white}
+  .btn.success{background:var(--success);color:white}
+  .grid{display:grid;gap:1rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem}
+  .cat{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;text-align:center;
+       box-shadow:0 6px 18px rgba(0,0,0,.06);cursor:pointer}
   .emoji{font-size:2rem;display:block;margin-bottom:.4rem}
-  .panel{background:#fff;border:1px solid #cbd5e1;border-radius:.8rem;padding:1rem}
-  .panel h3{margin:.2rem 0;border-bottom:2px solid #cbd5e1;padding-bottom:.3rem;display:flex;align-items:center;gap:.4rem}
-  .dot{width:.6rem;height:.6rem;background:#1f2937;border-radius:50%;display:inline-block;margin-right:.6rem}
-  .link{display:flex;align-items:center;gap:.6rem;padding:.35rem .2rem;border-radius:.4rem;cursor:pointer}
-  .link:hover{background:#f1f5f9}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
   .two{display:grid;grid-template-columns:1fr;gap:1rem}
   @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
-  .list{display:grid;gap:.6rem}
-  .item{background:#fff;border:1px solid #e2e8f0;border-radius:.6rem;padding:.6rem}
+  .link{display:flex;align-items:center;gap:.6rem;padding:.45rem;border-radius:.5rem;cursor:pointer}
+  .link:hover{background:#f3f4f6}
+  .dot{width:.55rem;height:.55rem;background:#1f2937;border-radius:50%}
+  .list{display:grid;gap:1rem}
+  .item{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  h2{margin:.2rem 0 1rem}
+  footer{color:var(--muted);text-align:center;padding:2rem 1rem}
 </style>
 <script>
 const HOTLINE_TEL = '051-222-1853';
@@ -74,17 +84,14 @@ function pickUnter(id){ state.unterId=id; renderResults(); show('s4'); }
 function renderResults(){
   const list=document.getElementById('results'); list.innerHTML='';
   let arr;
-  if(state.unterId){
-    arr = DATA.filter(it => it.id === state.unterId);
-  } else {
-    arr = DATA.filter(it => (!state.fahrzeug || it.fahrzeug===state.fahrzeug) && (!state.kategorie || it.kategorie===state.kategorie));
-  }
+  if(state.unterId){ arr = DATA.filter(it => it.id === state.unterId); }
+  else { arr = DATA.filter(it => (!state.fahrzeug || it.fahrzeug===state.fahrzeug) && (!state.kategorie || it.kategorie===state.kategorie)); }
   if(arr.length===0){ list.innerHTML='<div class="item">Keine Treffer.</div>'; return; }
   arr.forEach(it=>{
     const div=document.createElement('div'); div.className='item';
     const sub = it.unterkategorie ? ' · '+it.unterkategorie : '';
-    div.innerHTML='<h3>'+it.titel+'</h3>'
-      +'<p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
+    div.innerHTML='<h3 style="margin:.2rem 0 0">'+it.titel+'</h3>'
+      +'<p style="margin:.3rem 0 .6rem;color:#374151"><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
       +'<h4>Sofortmaßnahmen</h4><ul>'+(it.sofortmassnahmen||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'
       +'<h4>Schritte</h4><ol>'+(it.schritte||[]).map(x=>'<li>'+x+'</li>').join('')+'</ol>'
       +'<p><strong>Hinweise:</strong> '+(it.hinweise||'')+'</p>';
@@ -98,12 +105,26 @@ document.addEventListener('DOMContentLoaded',init);
 <header><h1>WikiStöria</h1></header>
 <div class="wrap">
 
-  <!-- Schritt 1: Dringlichkeit -->
+  <!-- Schritt 1: Moderne Startseite mit Cards -->
   <section class="section active" id="s1">
     <h2>Wie dringend ist die Störungsbehebung?</h2>
-    <div class="grid">
-      <button class="btn danger" onclick="urgent('high')">Sehr dringend</button>
-      <button class="btn green" onclick="urgent('normal')">Nicht dringend</button>
+    <div class="cardrow">
+      <div class="card" onclick="urgent('high')">
+        <div class="icon">⏱️</div>
+        <div>
+          <div class="title">Sehr dringend</div>
+          <div style="color:var(--muted)">Sicherheitsrelevant oder Stillstand</div>
+        </div>
+        <div style="margin-left:auto"><button class="btn danger">Weiter</button></div>
+      </div>
+      <div class="card" onclick="urgent('normal')">
+        <div class="icon">✅</div>
+        <div>
+          <div class="title">Nicht dringend</div>
+          <div style="color:var(--muted)">Leite zur Auswahl weiter</div>
+        </div>
+        <div style="margin-left:auto"><button class="btn success">Weiter</button></div>
+      </div>
     </div>
   </section>
 
@@ -111,14 +132,19 @@ document.addEventListener('DOMContentLoaded',init);
   <section class="section" id="urgent">
     <h2 id="hotline-title">Bitte rufe den Helpdesk an</h2>
     <a id="hotline-link" class="btn danger" href="#"><strong>Anrufen:</strong> <span id="hotline-number"></span></a>
-    <button class="btn green" onclick="show('s2')" style="margin-top:.6rem">Weiter</button>
+    <div style="height:.6rem"></div>
+    <button class="btn success" onclick="show('s2')">Weiter</button>
   </section>
 
   <!-- Schritt 2: Fahrzeug -->
   <section class="section" id="s2">
     <h2>Welches Fahrzeug?</h2>
     <div class="grid">
-      <script>document.currentScript.insertAdjacentHTML('beforebegin',FAHRZEUGE.map(v=>'<button class="btn" style="background:#e2e8f0" onclick="pickFahrzeug(\''+v+'\')">'+v+'</button>').join(''))</script>
+      <script>
+        document.currentScript.insertAdjacentHTML('beforebegin',
+          FAHRZEUGE.map(v=>'<div class="card" onclick="pickFahrzeug(\''+v+'\')"><div class="icon">🚆</div><div class="title">'+v+'</div></div>').join('')
+        )
+      </script>
     </div>
   </section>
 
@@ -126,12 +152,14 @@ document.addEventListener('DOMContentLoaded',init);
   <section class="section" id="s3">
     <h2>Kategorie wählen</h2>
     <div class="cards">
-      <script>document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="card" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');</script>
+      <script>
+        document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="cat" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');
+      </script>
     </div>
-    <button class="btn" style="background:#e2e8f0" onclick="show('s2')" >Zurück</button>
+    <div style="margin-top:1rem"><button class="btn" onclick="show('s2')">Zurück</button></div>
   </section>
 
-  <!-- Schritt 3b: Untermenü (2 Spalten) nur für Re 450 DPZ + Bremsen -->
+  <!-- Schritt 3b: Untermenü -->
   <section class="section" id="s3b">
     <h2>Bremsen · Re 450 DPZ</h2>
     <div class="two">
@@ -153,17 +181,17 @@ document.addEventListener('DOMContentLoaded',init);
         <div class="link" onclick="pickUnter('pb_ep_ab_bt')"><span class="dot"></span><span>EP‑Bremse an AB/Bt ausschalten</span></div>
       </div>
     </div>
-    <button class="btn" style="background:#e2e8f0;margin-top:1rem" onclick="show('s3')">Zurück</button>
+    <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
   </section>
 
   <!-- Schritt 4: Ergebnisse -->
   <section class="section" id="s4">
     <h2>Ergebnisse</h2>
     <div id="results" class="list"></div>
-    <button class="btn" style="background:#e2e8f0;margin-top:.6rem" onclick="show('s3')">Zurück</button>
+    <div style="margin-top:1rem"><button class="btn" onclick="show('s3')">Zurück</button></div>
   </section>
 
 </div>
-<footer style="text-align:center;color:#475569;padding:2rem">WikiStöria · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+<footer>WikiStöria · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
 </body>
 </html>

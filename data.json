@@ -1,0 +1,33 @@
+[
+  {
+    "id": "demo_tuer",
+    "titel": "Tür klemmt",
+    "fahrzeug": "RABe 511 RVD",
+    "kategorie": "Einstiegstüren",
+    "schweregrad": "mittel",
+    "sofortmassnahmen": [
+      "Zug sichern",
+      "Tür sperren"
+    ],
+    "schritte": [
+      "Visuelle Prüfung",
+      "SOP beachten"
+    ],
+    "hinweise": "Demo – bitte mit SOP abgleichen."
+  },
+  {
+    "id": "demo_bremse",
+    "titel": "Bremswarnung",
+    "fahrzeug": "Re 420 HVZ-D",
+    "kategorie": "Bremsen",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Anhalten",
+      "Leitstelle informieren"
+    ],
+    "schritte": [
+      "Fehlercode notieren"
+    ],
+    "hinweise": "Demo – sicherheitsrelevant."
+  }
+]

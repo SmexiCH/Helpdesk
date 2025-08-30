@@ -77,21 +77,6 @@
     "hinweise": "Demo"
   },
   {
-    "id": "pb_auszupfen",
-    "titel": "Bremsen auszupfen",
-    "fahrzeug": "Re 450 DPZ",
-    "kategorie": "Bremsen",
-    "unterkategorie": "Pneumatische Bremse",
-    "schweregrad": "mittel",
-    "sofortmassnahmen": [
-      "Sichern"
-    ],
-    "schritte": [
-      "Vorgehen nach SOP"
-    ],
-    "hinweise": "Demo"
-  },
-  {
     "id": "pb_gesamte_ab_bt",
     "titel": "Gesamte Bremse ausschalten AB/Bt",
     "fahrzeug": "Re 450 DPZ",
@@ -165,5 +150,26 @@
       "EP ausschalten AB/Bt"
     ],
     "hinweise": "Demo"
+  },
+  {
+    "id": "pb_auszupfen",
+    "titel": "Bremsen Auszupfen",
+    "fahrzeug": "Re 450 DPZ",
+    "kategorie": "Bremsen",
+    "unterkategorie": "Pneumatische Bremse",
+    "schweregrad": "hoch",
+    "sofortmassnahmen": [
+      "Fahrzeug sichern",
+      "Wenn Bremse(n) nicht löst → Zug sichern"
+    ],
+    "schritte": [
+      "Absperrhahn «Automatische Bremse» [121.6] rot schliessen.",
+      "Auslöseventil [124.6] rot ca. 20 Sekunden drücken, bis keine Luft mehr entweicht.",
+      "Kontrolle: gesamte Bremse am Wagen lose.",
+      "Wenn Bremsen lose: Autom. Bremse wieder einschalten [121.6], Bremsprobe wiederholen.",
+      "Automatische Bremse Absperrhahn auf Plattform B1 + B6 beachten.",
+      "NDW: Lösezug in der Pneumatikktafel ziehen (unter der Treppe gegenüber vom WC-Eingang) [800.124.6.01]"
+    ],
+    "hinweise": "Siehe Abbildung der Brems- und Pneumatiktafeln. Platzhalter für Bild: <img src='bremsen-auszupfen.png'>"
   }
 ]

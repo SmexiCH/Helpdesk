@@ -4,13 +4,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Helpdesk</title>
+<title>Störungshilfe</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#da291c">
+<meta name="theme-color" content="#444444">
 <style>
-  :root{--sbb:#da291c}
+  :root{--metal1:#6b7280;--metal2:#9ca3af;--metal3:#f3f4f6;--metal4:#111827}
   body{margin:0;font-family:sans-serif;background:#f1f5f9;color:#0f172a}
-  header{background:var(--sbb);color:#fff;padding:1rem}
+  /* Metallic header */
+  header{
+    color:#111; padding:1rem; position:relative; overflow:hidden;
+    background: linear-gradient(135deg, var(--metal4) 0%, var(--metal2) 22%, var(--metal3) 50%, var(--metal2) 78%, var(--metal4) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.2), 0 4px 12px rgba(0,0,0,.2);
+  }
+  header h1{margin:0; color:#fff; text-shadow: 0 1px 1px rgba(0,0,0,.4)}
+  header::after{
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0) 40%);
+    pointer-events:none; mix-blend-mode: screen;
+  }
   .wrap{max-width:1000px;margin:0 auto;padding:1rem}
   .grid{display:grid;gap:1rem}
   .section{display:none}.section.active{display:block}
@@ -64,7 +75,7 @@ function renderResults(){
   const list=document.getElementById('results'); list.innerHTML='';
   let arr;
   if(state.unterId){
-    arr = DATA.filter(it => it.id === state.unterId); // show only chosen item
+    arr = DATA.filter(it => it.id === state.unterId);
   } else {
     arr = DATA.filter(it => (!state.fahrzeug || it.fahrzeug===state.fahrzeug) && (!state.kategorie || it.kategorie===state.kategorie));
   }
@@ -72,7 +83,6 @@ function renderResults(){
   arr.forEach(it=>{
     const div=document.createElement('div'); div.className='item';
     const sub = it.unterkategorie ? ' · '+it.unterkategorie : '';
-    // Details expanded by default (no <details>)
     div.innerHTML='<h3>'+it.titel+'</h3>'
       +'<p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+sub+' · '+(it.schweregrad||'')+'</p>'
       +'<h4>Sofortmaßnahmen</h4><ul>'+(it.sofortmassnahmen||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'
@@ -85,7 +95,7 @@ document.addEventListener('DOMContentLoaded',init);
 </script>
 </head>
 <body>
-<header><h1>Helpdesk</h1></header>
+<header><h1>Störungshilfe</h1></header>
 <div class="wrap">
 
   <!-- Schritt 1: Dringlichkeit -->
@@ -154,6 +164,6 @@ document.addEventListener('DOMContentLoaded',init);
   </section>
 
 </div>
-<footer style="text-align:center;color:#475569;padding:2rem">Helpdesk · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+<footer style="text-align:center;color:#475569;padding:2rem">Störungshilfe · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
 </body>
 </html>

@@ -1,10 +1,10 @@
 {
-  "name": "Helpdesk",
-  "short_name": "Helpdesk",
+  "name": "Störungshilfe",
+  "short_name": "Störungshilfe",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#da291c",
-  "theme_color": "#da291c",
+  "background_color": "#444444",
+  "theme_color": "#444444",
   "icons": [
     {
       "src": "icon-192.png",

@@ -1,6 +1,88 @@
-<!doctype html><html lang='de'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Helpdesk</title><link rel='manifest' href='manifest.webmanifest'>
-<meta name='theme-color' content='#0f172a'></head>
-<body><h1>Helpdesk Final</h1>
-<p>Demo-Version. Dateien ins Repo hochladen, dann erscheint die App.</p></body></html>
+
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helpdesk</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f172a">
+<style>
+  body{margin:0;font-family:sans-serif;background:#f1f5f9;color:#0f172a}
+  header{background:#0f172a;color:white;padding:1rem}
+  .wrap{max-width:900px;margin:0 auto;padding:1rem}
+  .grid{display:grid;gap:1rem}
+  .section{display:none}.section.active{display:block}
+  .btn{padding:.8rem 1rem;border-radius:.7rem;border:0;cursor:pointer;font-size:1rem}
+  .btn.danger{background:#dc2626;color:white}
+  .btn.ghost{background:#e2e8f0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.8rem}
+  .card{background:white;border-radius:.8rem;padding:.8rem;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.1);cursor:pointer}
+  .emoji{font-size:2rem;display:block;margin-bottom:.4rem}
+  .list{display:grid;gap:.6rem}
+  .item{background:white;border-radius:.6rem;padding:.6rem;border:1px solid #e2e8f0}
+  footer{text-align:center;color:#475569;padding:2rem;font-size:.9rem}
+</style>
+<script>
+const HOTLINE_TEL = '+41 80 000 00 00';
+const FAHRZEUGE = ['Re 450 DPZ','Re 420 HVZ-D','RABe 514 DTZ','RABe 511 RVD'];
+const KATEGORIEN = [
+  {name:'Fahrsperre',icon:'🚦'},
+  {name:'Reset',icon:'🔄'},
+  {name:'Leittechnik',icon:'💻'},
+  {name:'Pneumatik',icon:'🔧'},
+  {name:'Bremsen',icon:'🛑'},
+  {name:'Zugbeeinflussung',icon:'📡'},
+  {name:'TELOC / V-Messer',icon:'📊'},
+  {name:'Schleppen',icon:'🚛'},
+  {name:'Einstiegstüren',icon:'🚪'},
+  {name:'Kupplung',icon:'🔗'},
+  {name:'HLK',icon:'❄️'},
+  {name:'KIS / TIMS / Funk',icon:'📢'},
+  {name:'WC',icon:'🚻'},
+  {name:'Dokumente',icon:'📄'}
+];
+let DATA=[], state={fahrzeug:null,kategorie:null};
+async function init(){ if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');} try{DATA=await (await fetch('data.json')).json();}catch(e){DATA=[];} show('s1'); }
+function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function urgent(level){ if(level==='high'){document.getElementById('hotline-number').textContent=HOTLINE_TEL;document.getElementById('hotline-link').href='tel:'+HOTLINE_TEL;show('urgent');} else show('s2'); }
+function pickFahrzeug(v){state.fahrzeug=v;show('s3');}
+function pickKategorie(k){state.kategorie=k;renderResults();show('s4');}
+function renderResults(){const list=document.getElementById('results');list.innerHTML='';const arr=DATA.filter(it=>(!state.fahrzeug||it.fahrzeug===state.fahrzeug)&&(!state.kategorie||it.kategorie===state.kategorie));if(arr.length===0){list.innerHTML='<p>Keine Treffer.</p>';return;}arr.forEach(it=>{const div=document.createElement('div');div.className='item';div.innerHTML='<h3>'+it.titel+'</h3><p><strong>'+it.fahrzeug+'</strong> · '+it.kategorie+' · '+it.schweregrad+'</p>';list.appendChild(div);});}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</head>
+<body>
+<header><h1>Helpdesk</h1></header>
+<div class="wrap">
+<section class="section active" id="s1">
+  <h2>Wie dringend ist die Störungsbehebung?</h2>
+  <button class="btn danger" onclick="urgent('high')">Sehr dringend (Sicherheit/Stillstand)</button>
+  <button class="btn ghost" onclick="urgent('normal')">Nicht dringend</button>
+</section>
+<section class="section" id="urgent">
+  <h2>Sofort Leitstelle kontaktieren</h2>
+  <a id="hotline-link" class="btn danger" href="#"><span>Anrufen:</span> <span id="hotline-number"></span></a>
+  <button class="btn ghost" onclick="show('s2')">Weiter</button>
+</section>
+<section class="section" id="s2">
+  <h2>Welches Fahrzeug?</h2>
+  <div class="grid">
+    <script>document.currentScript.insertAdjacentHTML('beforebegin',FAHRZEUGE.map(v=>'<button class="btn ghost" onclick="pickFahrzeug(\''+v+'\')">'+v+'</button>').join(''))</script>
+  </div>
+</section>
+<section class="section" id="s3">
+  <h2>Kategorie wählen</h2>
+  <div class="cards" id="catCards">
+    <script>document.currentScript.parentElement.innerHTML=KATEGORIEN.map(k=>'<div class="card" onclick="pickKategorie(\''+k.name+'\')"><span class="emoji">'+k.icon+'</span>'+k.name+'</div>').join('');</script>
+  </div>
+</section>
+<section class="section" id="s4">
+  <h2>Ergebnisse</h2>
+  <div id="results" class="list"></div>
+  <button class="btn ghost" onclick="show('s3')">Zurück</button>
+</section>
+</div>
+<footer>Helpdesk App · Feedback: <a href="mailto:pascal.ammann@sbb.ch">pascal.ammann@sbb.ch</a></footer>
+</body>
+</html>
